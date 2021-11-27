@@ -3,6 +3,3 @@
 
 npx lint-staged --concurrent false
 npx lint-staged --concurrent false
-npx lint-staged --concurrent false
-npx lint-staged --concurrent false
-npx lint-staged --concurrent false

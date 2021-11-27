@@ -1,7 +1,7 @@
 module.exports = {
   mode: 'jit',
   purge: ['./src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false,
+  darkMode: 'class',
   theme: {
     fontSize: {
       xs: '0.75rem',
@@ -40,8 +40,43 @@ module.exports = {
           900: '#2a4365',
         },
       },
+      boxShadow: {
+        white:
+          '0 4px 6px 5px rgba(255, 255, 255, 0.1),0 -4px 6px 5px rgba(255, 255, 255, 0.1), 0 2px 4px 5px rgba(255, 255, 255, 0.06)',
+      },
+      typography: (theme) => ({
+        dark: {
+          css: {
+            color: theme('colors.gray.300'),
+            h1: {
+              color: theme('colors.gray.100'),
+            },
+            h2: {
+              color: theme('colors.gray.100'),
+            },
+          },
+        },
+        light: {
+          css: {
+            color: theme('colors.gray.800'),
+            h1: {
+              color: theme('colors.gray.800'),
+            },
+            h2: {
+              color: theme('colors.gray.800'),
+            },
+            p: {
+              color: theme('colors.gray.800'),
+            },
+          },
+        },
+      }),
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      typography: ['dark'],
+    },
+  },
   plugins: [],
 };

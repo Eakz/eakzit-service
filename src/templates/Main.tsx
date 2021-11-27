@@ -1,71 +1,43 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
-import Link from 'next/link';
+import { AppConfig } from 'src/config';
 
-import { AppConfig } from '../utils/AppConfig';
+import Header from './Header';
 
 type IMainProps = {
   meta: ReactNode;
-  children: ReactNode;
+  center?: boolean;
 };
 
-const Main = (props: IMainProps) => (
-  <div className='antialiased w-full text-gray-700 px-1'>
-    {props.meta}
-
-    <div className='max-w-screen-md mx-auto'>
-      <div className='border-b border-gray-300'>
-        <div className='pt-16 pb-8'>
-          <div className='font-bold text-3xl text-gray-900'>
-            {AppConfig.title}
-          </div>
-          <div className='text-xl'>{AppConfig.description}</div>
-        </div>
-        <div>
-          <ul className='flex flex-wrap text-xl'>
-            <li className='mr-6'>
-              <Link href='/'>
-                <a className='text-gray-700 border-none hover:text-gray-900'>
-                  Home
-                </a>
-              </Link>
-            </li>
-            <li className='mr-6'>
-              <Link href='/about/'>
-                <a className='text-gray-700 border-none hover:text-gray-900'>
-                  About
-                </a>
-              </Link>
-            </li>
-            <li className='mr-6'>
-              <a
-                className='text-gray-700 border-none hover:text-gray-900'
-                href='https://github.com/ixartz/Next-js-Boilerplate'
-              >
-                GitHub
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className='py-5 text-xl content'>{props.children}</div>
-
-      <div className='border-t border-gray-300 text-center py-8 text-sm'>
+const Main: React.FC<IMainProps> = ({ children, meta, center = false }) => {
+  return (
+    <>
+      {meta}
+      <Header />
+      <main
+        className={`antialiased max-h-screen lg:max-w-5xl lg:shadow-xl lg:dark:shadow-white overflow-hidden lg:my-0 lg:mx-auto md:p-8 flex-1 flex flex-col main-content align-middle overflow-y-auto border-gray-900 items-center ${
+          center && 'justify-center'
+        }`}
+      >
+        {children}
+      </main>
+      <footer
+        className={
+          'border-t border-gray-300 text-center h-8 text-sm flex justify-center items-center bg-gray-700 text-gray-300 dark:bg-gray-200 dark:text-gray-800'
+        }
+      >
         © Copyright {new Date().getFullYear()} {AppConfig.title}. Powered with{' '}
         <span role='img' aria-label='Love'>
           ♥
         </span>{' '}
-        by <a href='https://creativedesignsguru.com'>CreativeDesignsGuru</a>
-        {/*
-         * PLEASE READ THIS SECTION
-         * We'll really appreciate if you could have a link to our website
-         * The link doesn't need to appear on every pages, one link on one page is enough.
-         * Thank you for your support it'll mean a lot for us.
-         */}
-      </div>
-    </div>
-  </div>
-);
+        by{' '}
+        <a className='decoration-clone' href='https://eakzit.site'>
+          {' '}
+          EakzIT
+        </a>
+      </footer>
+    </>
+  );
+};
 
 export { Main };
