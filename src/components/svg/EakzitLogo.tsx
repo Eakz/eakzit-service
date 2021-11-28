@@ -1,33 +1,20 @@
 import React from 'react';
 
-interface ControlledSVG {
-  width?: number;
-  height?: number;
-  color1?: string;
-  color2?: string;
-  color3?: string;
+interface LogoProps {
   className?: string;
 }
 
-const EakzitLogo: React.FC<ControlledSVG> = ({
-  width,
-  height,
-  color1 = 'black',
-  color2 = 'green',
-  color3 = 'red',
-  ...props
-}) => (
+const EakzitLogo: React.FC<LogoProps> = (props) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
-    width={`${width}px`}
-    height={`${height}px`}
+    width='80px'
+    height='40px'
     viewBox='0 0 1208 608'
     {...props}
   >
     <path
-      id='eakz'
-      fill={color1}
-      stroke={color1}
+      className='fill-current text-gray-200 dark:text-gray-900'
+      stroke='black'
       strokeWidth='1'
       style={{ transform: 'translateY(-500px) translateX(-300px)' }}
       d='
@@ -113,8 +100,8 @@ const EakzitLogo: React.FC<ControlledSVG> = ({
 
     <path
       id='leftK'
-      fill={color2}
-      stroke={color1}
+      className='fill-current text-green-400'
+      stroke='black'
       strokeWidth='1'
       style={{ transform: 'translateY(-500px) translateX(-300px)' }}
       d='M 716.00,788.00
@@ -125,8 +112,8 @@ const EakzitLogo: React.FC<ControlledSVG> = ({
     />
     <path
       id='IT'
-      fill={color3}
-      stroke={color1}
+      fill='red'
+      stroke='black'
       strokeWidth='1'
       style={{ transform: 'translateY(-500px) translateX(-300px)' }}
       d='M 1070.00,679.00
@@ -206,7 +193,7 @@ const EakzitLogo: React.FC<ControlledSVG> = ({
     <path
       id='ITnotch'
       fill='white'
-      stroke={color1}
+      stroke='black'
       strokeWidth='1'
       style={{ transform: 'translateY(-500px) translateX(-300px)' }}
       d=' M 1069.00,681.00

@@ -5,7 +5,7 @@ import { SunIcon } from '@heroicons/react/solid';
 import { useTheme } from 'next-themes';
 import Switch from 'react-switch';
 
-const ThemeSwitch: React.FC = () => {
+const ThemeSwitch: React.FC<{ className?: string }> = (props) => {
   const { theme, setTheme } = useTheme();
 
   const dark = theme === 'dark';
@@ -29,10 +29,9 @@ const ThemeSwitch: React.FC = () => {
     <Switch
       onChange={handleChange}
       checked={checked}
-      className='px-8'
       aria-label='switch between day and night themes'
-      offColor='#555'
-      onColor='#fff'
+      offColor='#ccf'
+      onColor='#555'
       onHandleColor='#eee'
       handleDiameter={20}
       uncheckedIcon={
@@ -47,6 +46,7 @@ const ThemeSwitch: React.FC = () => {
       }
       height={24}
       width={48}
+      {...props}
     />
   );
 };

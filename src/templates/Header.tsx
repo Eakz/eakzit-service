@@ -108,38 +108,44 @@ const menu = [
 
 const Header: React.FC = () => {
   return (
-    <Popover className='relative bg-white'>
+    <Popover className='relative border-b-2  border-gray-400 dark:border-gray-100 bg-gray-700 text-gray-300 dark:bg-gray-200 shadow-md dark:shadow-white'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6'>
-        <div className='flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10 max-h-16'>
+        <div className='flex justify-between md:justify-center lg:justify-between items-center  py-6  md:space-x-10 max-h-16'>
           <div className='flex justify-start lg:w-0 lg:flex-1'>
             <Link href={ROUTES.home} passHref>
               <a>
                 <span className='sr-only'>Workflow</span>
-                <EakzitLogo className='h-8 w-auto sm:h-10' />
+                <EakzitLogo
+                  className='h-8 w-auto sm:h-10'
+                  // color1={theme === 'light' ? 'white' : 'black'}
+                />
               </a>
             </Link>
           </div>
+          <ThemeSwitch className='!hidden lg:!flex' />
           <div className='-mr-2 -my-2 md:hidden'>
-            <Popover.Button className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
+            <Popover.Button className='bg-white dark:bg-gray-800 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
               <span className='sr-only'>Open menu</span>
               <MenuIcon className='h-6 w-6' aria-hidden='true' />
             </Popover.Button>
           </div>
-          <ThemeSwitch />
-          <div className='px-5 py-5 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8'>
-            {menu.map((item) => (
-              <div key={item.name} className='flow-root'>
-                <Link href={item.href} passHref>
-                  <a
-                    href={item.href}
-                    className='-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900'
-                  >
-                    <span className='ml-3'>{item.name}</span>
-                  </a>
-                </Link>
-              </div>
-            ))}
+
+          <div className='hidden sm:hidden md:flex px-5 py-5 space-y-6  sm:space-y-0 sm:space-x-10 sm:px-8'>
+            {false &&
+              menu.map((item) => (
+                <div key={item.name} className='flow-root'>
+                  <Link href={item.href} passHref>
+                    <a
+                      href={item.href}
+                      className='-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-400 dark:text-gray-900'
+                    >
+                      <span className='ml-3'>{item.name}</span>
+                    </a>
+                  </Link>
+                </div>
+              ))}
           </div>
+          <ThemeSwitch className='!hidden md:!flex lg:!hidden' />
           {/* <Popover.Group as='nav' className='hidden md:flex space-x-10'>
             <Popover className='relative'>
               {({ open }) => (
@@ -348,16 +354,19 @@ const Header: React.FC = () => {
       >
         <Popover.Panel
           focus
-          className='absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden'
+          className='absolute top-0 z-10 min-h-screen h-full max-h-screen inset-x-0 p-2 transition transform origin-top-right md:hidden'
         >
-          <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50'>
+          <div className='rounded-lg flex flex-1 h-full flex-col shadow-lg ring-1 ring-black ring-opacity-5 divide-y-2 divide-gray-50 dark:divide-gray-800 bg-gray-700 text-gray-300 dark:bg-gray-200  dark:shadow-white border-2 border-gray-300 dark:border-gray-800'>
             <div className='pt-5 pb-6 px-5'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <EakzitLogo className='h-8 w-auto sm:h-10' />
+                  <EakzitLogo
+                    className='logo h-8 w-auto sm:h-10'
+                    // color1={theme === 'light' ? 'white' : 'black'}
+                  />
                 </div>
                 <div className='-mr-2'>
-                  <Popover.Button className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
+                  <Popover.Button className='bg-white dark:bg-gray-800 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
                     <span className='sr-only'>Close menu</span>
                     <XIcon className='h-6 w-6' aria-hidden='true' />
                   </Popover.Button>
@@ -383,21 +392,26 @@ const Header: React.FC = () => {
                 </nav>
               </div>
             </div>
-            <div className='py-6 px-5 space-y-6'>
-              <div className='grid grid-cols-2 gap-y-4 gap-x-8'>
+            <div className='py-6 px-5 space-y-6 flex flex-col justify-end flex-1'>
+              <div className='grid grid-cols-2 gap-y-4 gap-x-8 flex-1'>
+                {false &&
+                  menu.map((item) => (
+                    <div key={item.name} className='flow-root'>
+                      <Link href={item.href} passHref>
+                        <a
+                          href={item.href}
+                          className='-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-400 dark:text-gray-900'
+                        >
+                          <span className='ml-3'>{item.name}</span>
+                        </a>
+                      </Link>
+                    </div>
+                  ))}
                 <a
                   href='#'
                   className='text-base font-medium text-gray-900 hover:text-gray-700'
-                >
-                  Pricing
-                </a>
+                ></a>
 
-                <a
-                  href='#'
-                  className='text-base font-medium text-gray-900 hover:text-gray-700'
-                >
-                  Docs
-                </a>
                 {/* {resources.map((item) => (
                   <a
                     key={item.name}
@@ -422,6 +436,9 @@ const Header: React.FC = () => {
                   </a>
                 </p>
               </div> */}
+              <div className='flex justify-end justify-self-end'>
+                <ThemeSwitch />
+              </div>
             </div>
           </div>
         </Popover.Panel>
