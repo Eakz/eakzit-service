@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { DownloadIcon, UploadIcon } from '@heroicons/react/outline';
 
 import { UploadButton } from 'src/components/common/UploadButton';
+import FileList from 'src/components/pdf-page/FileList';
+import { useFileContext } from 'src/context/fileContext';
 import { Meta } from 'src/layout/Meta';
-import { uploadFileRequest } from 'src/services/upload.services';
+import { getFileList, uploadFileRequest } from 'src/services/file.services';
 import { Main } from 'src/templates/Main';
 
 const Index = () => {
   const [progress, setProgress] = useState(0);
+  const { fileList, setFileList } = useFileContext();
   const onChange = async (formData: FormData) => {
-    await uploadFileRequest(formData, (event) => {
+    const response = await uploadFileRequest(formData, (event) => {
       setProgress(Math.round((event.loaded * 100) / event.total));
     });
+    setFileList(response.fileNames);
   };
+  const getList = async () => {
+    const response = await getFileList();
+    setFileList(response.fileList);
+  };
+  useEffect(() => {
+    getList();
+  }, []);
   return (
     <Main
       meta={
@@ -23,7 +34,7 @@ const Index = () => {
         />
       }
     >
-      <div>
+      <div className='flex flex-col'>
         <div className='bg-white dark:bg-gray-800 rounded-lg w-72 md:shadow block p-4 m-auto'>
           <div>
             <span className='text-xs font-light inline-block py-1 px-2 uppercase rounded-full text-white dark:text-gray-800 bg-gray-800 dark:bg-gray-50'>
@@ -39,7 +50,10 @@ const Index = () => {
           </div>
         </div>
         <div className='flex flex-col items-center md:flex-row'>
-          <button className='transition-all shadow drop-shadow-sm   bg-gray-300 hover:shadow-sm hover:drop-shadow-xl dark:hover:shadow-white hover:bg-gray-400 text-gray-800 hover:text-gray-50 w-32 font-bold m-5 md:m-10 py-2 px-4 rounded inline-flex items-center justify-between'>
+          <button
+            onClick={getList}
+            className='transition-all shadow drop-shadow-sm   bg-gray-300 hover:shadow-sm hover:drop-shadow-xl dark:hover:shadow-white hover:bg-gray-400 text-gray-800 hover:text-gray-50 w-32 font-bold m-5 md:m-10 py-2 px-4 rounded inline-flex items-center justify-between'
+          >
             <DownloadIcon width={20} height={20} />
             <span>Download</span>
           </button>
@@ -54,6 +68,7 @@ const Index = () => {
             <span>Upload</span>
           </UploadButton>
         </div>
+        {!!fileList.length && <FileList files={fileList} />}
       </div>
     </Main>
   );
