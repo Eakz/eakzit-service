@@ -76,6 +76,7 @@ apiRoute.post(
     const folderPath = path.join(process.cwd(), 'public/transformed');
     const cmykFileName = `CMYK-${fileName}`;
     const pathToCmykFile = path.join(`${folderPath}/${cmykFileName}`);
+    console.log('BEFORE EXECUTION');
     const childProcess = await exec(
       `./convert.sh -f ${absPathToFile} -t ${pathToCmykFile}`,
       {},
@@ -97,6 +98,7 @@ apiRoute.post(
       },
     );
     apiRoute.pid = childProcess.pid;
+    console.log('ACTIVE PID', apiRoute.pid);
   },
 );
 export const config = {
