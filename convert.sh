@@ -6,7 +6,7 @@
 
 while getopts f:t: flag
 do
-	case ${flag} in 
+	case ${flag} in
 		f) from=${OPTARG};;
 		t) to=${OPTARG};;
 	esac

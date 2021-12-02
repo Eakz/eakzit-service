@@ -2,6 +2,7 @@
 
 # pdf generated pages
 /public/uploads/*
+/public/transformed/*
 
 # dependencies
 /node_modules

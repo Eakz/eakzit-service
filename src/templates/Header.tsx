@@ -110,7 +110,7 @@ const Header: React.FC = () => {
   return (
     <Popover className='relative border-b-2  border-gray-400 dark:border-gray-100 bg-gray-700 text-gray-300 dark:bg-gray-200 shadow-md dark:shadow-white'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6'>
-        <div className='flex justify-between md:justify-center lg:justify-between items-center  py-6  md:space-x-10 max-h-16'>
+        <div className='flex justify-between md:justify-between lg:justify-between items-center  py-6  md:space-x-10 max-h-16'>
           <div className='flex justify-start lg:w-0 lg:flex-1'>
             <Link href={ROUTES.home} passHref>
               <a>

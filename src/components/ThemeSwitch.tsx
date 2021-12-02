@@ -8,27 +8,21 @@ import Switch from 'react-switch';
 const ThemeSwitch: React.FC<{ className?: string }> = (props) => {
   const { theme, setTheme } = useTheme();
 
-  const dark = theme === 'dark';
-
-  const [checked, setChecked] = useState(dark);
   const [mounted, setMounted] = useState(false);
 
-  const handleChange = (nextChecked: boolean) => {
-    setChecked(nextChecked);
+  const handleChange = () => {
+    setTheme(theme !== 'dark' ? 'dark' : 'light');
   };
 
   // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), []);
-  useEffect(() => {
-    setTheme(checked ? 'dark' : 'light');
-  }, [checked, setTheme]);
 
   if (!mounted) return null;
 
   return (
     <Switch
       onChange={handleChange}
-      checked={checked}
+      checked={theme === 'dark'}
       aria-label='switch between day and night themes'
       offColor='#ccf'
       onColor='#555'
