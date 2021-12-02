@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   // DownloadIcon,
@@ -83,20 +83,17 @@ const Index = () => {
       getOrSetInitalData(responseData);
     } catch (e) {
       setProgress(0);
+      toast('File transforming script is currently busy', {
+        type: 'error',
+        position: 'top-center',
+        theme: 'colored',
+        className: 'custom-toast',
+      });
     } finally {
       setCancelTokenSourceS(null);
-      console.log('DONE2');
       setLoading(false);
     }
   };
-  useEffect(() => {
-    toast('File transforming script is currently busy', {
-      type: 'error',
-      position: 'top-center',
-      theme: 'colored',
-      className: 'custom-toast',
-    });
-  }, []);
   return (
     <Main
       meta={
