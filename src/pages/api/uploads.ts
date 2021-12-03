@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable unused-imports/no-unused-vars */
 import fs from 'fs';
 import path from 'path';
 
@@ -77,6 +79,7 @@ apiRoute.post(
     const cmykFileName = `CMYK-${fileName}`;
     const pathToCmykFile = path.join(`${folderPath}/${cmykFileName}`);
     console.log('BEFORE EXECUTION');
+    // @ts-ignore
     const childProcess = await exec(
       `./convert.sh -f ${absPathToFile} -t ${pathToCmykFile}`,
       {},
@@ -84,7 +87,7 @@ apiRoute.post(
       (err, stdout, stderr) => {
         if (err) {
           // some err occurred
-          res.status(501).json({ error: 'File failure' });
+          res.status(501).json({ error: JSON.stringify({ err }) });
         } else {
           // the *entire* stdout and stderr (buffered)
           console.log(`stdout: ${stdout}`);
@@ -97,7 +100,8 @@ apiRoute.post(
         }
       },
     );
-    apiRoute.pid = childProcess.pid;
+    // apiRoute.pid = childProcess.pid;
+    apiRoute.pid = undefined;
     console.log('ACTIVE PID', apiRoute.pid);
   },
 );
