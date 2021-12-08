@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig, CancelTokenSource } from 'axios';
 
+import { UPLOAD_API } from 'src/config/constants';
+
 export const uploadFileRequest = async (
   formData: FormData,
   cancelTokenSource: CancelTokenSource,
@@ -13,7 +15,7 @@ export const uploadFileRequest = async (
     cancelToken: cancelTokenSource.token,
   };
   try {
-    const response = await axios.post('/api/uploads', formData, config);
+    const response = await axios.post(UPLOAD_API, formData, config);
     return response.data;
   } catch (error) {
     return null;
@@ -21,7 +23,7 @@ export const uploadFileRequest = async (
 };
 export const stopFileProcessing = async (): Promise<any> => {
   try {
-    const response = await axios.get('/api/uploads');
+    const response = await axios.get(UPLOAD_API);
     return response.data;
   } catch (error) {
     return null;

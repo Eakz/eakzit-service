@@ -1,1 +1,1 @@
-export const UPLOAD_FOLDER = './public/uploads';
+export const UPLOAD_API = '/api/pdf';
