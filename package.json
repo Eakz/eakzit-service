@@ -15,7 +15,7 @@
     "prepareInstall": "shx test -f ./.husky/_/husky.sh  && echo Husky Installed!|| husky install && shx chmod ug+x .husky/* ",
     "precommitInstall": "shx test -f ./.husky/pre-commit  && npx husky set .husky/pre-commit \"npx lint-staged --concurrent false\" && shx chmod ug+x .husky/* ||  npx husky add .husky/pre-commit \"npx lint-staged --concurrent false\" && shx chmod ug+x .husky/*",
     "postcommitInstall": "shx test -f ./.husky/post-commit  && npx husky set .husky/post-commit \"git update-index -g\" && shx chmod ug+x .husky/* ||  npx husky add .husky/post-commit \"git update-index -g\" && shx chmod ug+x .husky/*",
-    "commitmsgInstall": "shx test -f ./.husky/commit-msg  && npx husky set .husky/commit-msg \"npx --no -- commitlint --edit \\$1\" && shx chmod ug+x .husky/* || npx husky add .husky/commit-msg \"npx --no -- commitlint --edit \\$1\" && shx chmod ug+x .husky/*"
+    "commitmsgInstall": "shx test -f ./.husky/commit-msg  && npx husky set .husky/commit-msg \"npx --no -- commitlint --edit\" && shx chmod ug+x .husky/* || npx husky add .husky/commit-msg \"npx --no -- commitlint --edit\" && shx chmod ug+x .husky/*"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -42,7 +42,6 @@
     "@commitlint/cli": "^15.0.0",
     "@next/bundle-analyzer": "^12.0.2",
     "@types/multer": "^1.4.7",
-    "@types/node": "^16.11.6",
     "@types/react": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",

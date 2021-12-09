@@ -1,1 +1,1 @@
-export const UPLOAD_API = '/api/pdf';
+export const UPLOAD_API = 'https://api.eakzit.site/api-pdf';
