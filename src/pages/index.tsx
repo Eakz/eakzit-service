@@ -47,16 +47,21 @@ const getOrSetInitalData = (data?: Tdata): Tdata | null => {
   return data || null;
 };
 
+const generateRandomProcessID = () => {
+  return Math.random().toString().replace('.', '');
+};
+
 const Index = () => {
   const [progress, setProgress] = useState(0);
   const [data, setData] = useState<null | Tdata>(getOrSetInitalData());
+  const [randomPID, setRandomPID] = useState<string | null>();
   const [cancelTokenSourceS, setCancelTokenSourceS] =
     useState<CancelTokenSource | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const onCancel = async () => {
     if (cancelTokenSourceS) {
       cancelTokenSourceS.cancel();
-      stopFileProcessing();
+      stopFileProcessing(randomPID || '');
     }
   };
   const onChange = async (formData: FormData) => {
@@ -65,16 +70,19 @@ const Index = () => {
     setData(null);
     const cancelToken = axios.CancelToken.source();
     setCancelTokenSourceS(cancelToken);
-    // if (cancelToken) {
+    const PID = generateRandomProcessID();
+    setRandomPID(PID);
     try {
       const response = await uploadFileRequest(
         formData,
+        PID,
         cancelToken,
         (event) => {
           setProgress(Math.round((event.loaded * 100) / event.total));
         },
       );
-      if (response?.status === STATUS.BUSY) {
+
+      if (response?.status === STATUS.BUSY || !response) {
         setProgress(0);
         return;
       }
@@ -174,7 +182,7 @@ const Index = () => {
 
           {!loading && (
             <UploadButton
-              uploadFileName='theFiles'
+              uploadFileName='rgbPdf'
               acceptedFileTypes='.pdf'
               onChange={onChange}
               className='transition-all shadow drop-shadow-sm bg-green-500 hover:shadow-md hover:drop-shadow-xl dark:hover:shadow-white hover:bg-green-400 text-gray-800 hover:text-gray-50 w-32 font-bold m-5 md:m-10 py-2 px-4 rounded inline-flex items-center justify-between'

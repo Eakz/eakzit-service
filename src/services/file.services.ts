@@ -4,6 +4,7 @@ import { UPLOAD_API } from 'src/config/constants';
 
 export const uploadFileRequest = async (
   formData: FormData,
+  randomPID: string,
   cancelTokenSource: CancelTokenSource,
   progressCallback?: (progressEvent: ProgressEvent) => void,
 ): Promise<any> => {
@@ -15,15 +16,19 @@ export const uploadFileRequest = async (
     cancelToken: cancelTokenSource.token,
   };
   try {
-    const response = await axios.post(UPLOAD_API, formData, config);
+    const response = await axios.post(
+      `${UPLOAD_API}/${randomPID}`,
+      formData,
+      config,
+    );
     return response.data;
   } catch (error) {
     return null;
   }
 };
-export const stopFileProcessing = async (): Promise<any> => {
+export const stopFileProcessing = async (randomPID: string): Promise<any> => {
   try {
-    const response = await axios.get(UPLOAD_API);
+    const response = await axios.get(`${UPLOAD_API}/${randomPID}`);
     return response.data;
   } catch (error) {
     return null;
