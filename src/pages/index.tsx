@@ -8,6 +8,7 @@ import axios, { CancelTokenSource } from 'axios';
 import { toast } from 'react-toastify';
 
 import { UploadButton } from 'src/components/common/UploadButton';
+import { UPLOAD_API } from 'src/config/constants';
 import { classNames } from 'src/helpers';
 import { Meta } from 'src/layout/Meta';
 import {
@@ -162,7 +163,7 @@ const Index = () => {
           {!loading && data?.path && (
             <div className='flex flex-row justify-center items-center m-3 p-2 max-w-full'>
               <a
-                href={data?.path}
+                href={UPLOAD_API + data?.path}
                 className='max-w-full overflow-ellipsis'
                 download
               >
