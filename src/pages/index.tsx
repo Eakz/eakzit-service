@@ -163,7 +163,7 @@ const Index = () => {
           {!loading && data?.path && (
             <div className='flex flex-row justify-center items-center m-3 p-2 max-w-full'>
               <a
-                href={UPLOAD_API + data?.path}
+                href={`${UPLOAD_API}/${data?.path}`}
                 className='max-w-full overflow-ellipsis'
                 download
               >
