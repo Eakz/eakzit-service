@@ -1,5 +1,5 @@
 ### Eakzit - Services
-@TODO: content, codesharing
+@TODO: content, codesharing, mobile-friendly
 
 ### Philosophy
 
